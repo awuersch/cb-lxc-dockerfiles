@@ -1,0 +1,2 @@
+krb5.conf /etc/krb5.conf ro
+krb5 /etc/krb5 ro

@@ -1,0 +1,2 @@
+XAUTH /tmp/.docker.xauth
+DOCKER0ADDR $(ip addr |  awk '/inet .* docker0/ {print $2}' | sed 's,/.*,,')

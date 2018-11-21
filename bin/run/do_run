@@ -1,0 +1,81 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+usage="$0 ['i'|'it'|'iti'|'d'|'di'|'init-only'] volumeids arg ..."
+(($#>1)) || {
+  >&2 echo "$usage"
+  exit 1
+}
+
+mode=$1
+ids="$2"
+shift
+shift
+
+traceargs=
+case $mode in
+  i)
+    modeargs='--interactive'
+    ;;
+  it)
+    modeargs='--interactive --tty'
+    ;;
+  iti)
+    modeargs='--interactive --tty --init'
+    ;;
+  d)
+    modeargs='--detach'
+    ;;
+  di)
+    modeargs='--detach --init'
+    ;;
+  init-only)
+    modeargs='--init'
+    ;;
+  *)
+    >&2 echo "$usage"
+    exit 1
+    ;;
+esac
+
+# private registry
+REGISTRY=${REGISTRY:-rg1.tony.wuersch.name:443}
+# image name
+NAME=${NAME:-buster_me_sudo}
+# project base
+PROJ_BASE_DIR=${PROJ_BASE_DIR:-~/proj}
+# volumes base
+VOL_BASE_DIR=${VOL_BASE_DIR:-~/docker/volumes}
+# app project directory
+APPDIR=${APPDIR:-$PROJ_BASE_DIR/$NAME}
+# dockerfiles git repo
+REPO_DIR=${REPO_DIR:-~/src/git/github.com/awuersch/cb-lxc-dockerfiles}
+# docker command
+DOCKER_RUN_CMD=${DOCKER_RUN_CMD:-"docker run"}
+
+SCRIPT_ENV=${SCRIPT_ENV:-$REPO_DIR/bin/run_script_env}
+. $SCRIPT_ENV
+
+
+traceargs=
+[[ -v TRACE && $TRACE == on ]] && traceargs='--cap-add SYS_PTRACE'
+
+# define variable assignments
+eval $(emitallvars $VOL_BASE_DIR $ids)
+
+[[ -d $APPDIR ]] || {
+  >&2 echo "$APPDIR does not exist; please create it."
+  exit 1
+}
+
+args="$(eval echo -E $(emitargs $VOL_BASE_DIR $ids))"
+
+exec $DOCKER_RUN_CMD \
+  --network my-bridge \
+  $traceargs $modeargs \
+  --rm \
+  $args \
+  --name $NAME \
+  $REGISTRY/$NAME \
+  "$@"

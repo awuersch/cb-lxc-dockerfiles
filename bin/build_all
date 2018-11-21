@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+REPO_DIR=${REPO_DIR:-~/src/git/github.com/awuersch/cb-lxc-dockerfiles}
+SCRIPT_ENV=${SCRIPT_ENV:-$REPO_DIR/bin/script_env}
+. $SCRIPT_ENV
+
+squidifnot
+
+for image in $(inorder)
+do
+  echo building $image
+  cd $REPO_DIR/$image
+  if [[ "${image#*_}" == "base" ]]
+  then
+    docker image inspect $REGISTRY/$image 1>/dev/null 2>&1 || \
+    ./build.sh
+  else
+    docker image inspect $REGISTRY/$image 1>/dev/null 2>&1 || \
+    squidbuild $REGISTRY/$image
+  fi
+done

@@ -1,0 +1,64 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+REGISTRY="rg1.tony.wuersch.name:443"
+NAME=buster_rust_code
+APPDIR="$HOME/proj/$NAME"
+if (($#!=0)) ; then
+  APPDIR="$1"
+  if (($#==2)) ; then
+    REGISTRY="$2"
+  fi
+fi
+
+[[ -d $APPDIR ]] || {
+  >&2 echo "$APPDIR does not exist; please create it."
+  exit 1
+}
+
+# this is for docker containers
+# from a host
+# connected to remotely via ssh -X or ssh -XC
+#
+# notes on setting up XAUTH and DISPLAY:
+# https://stackoverflow.com/questions/48235040/run-x-application-in-a-docker-container-reliably-on-a-server-connected-via-ssh-w
+#   remember to alter on host:
+#      remote sshd_config (add "X11UseLocalhost no")
+#      nftables.conf ("ip saddr {172.18.0.0/16} tcp dport {6010} accept")
+#         ("172.18.0.0/16" should be my-bridge range)
+#      DISPLAY from <host>:10 to <docker0>:10
+#         ("172.17.0.1" should be docker0 ip addr)
+
+MEHOME=/home/me
+CODEVOLUME=$HOME/docker/volumes/code/pipenv
+GITVOLUME=$HOME/docker/volumes/git
+myUID=1000
+myGID=1000
+USERSOCKDIR=/run/user/$myUID
+XAUTH=/tmp/.docker.xauth
+DOCKER0ADDR=$(ip addr |  awk '/inet .* docker0/ {print $2}' | sed 's,/.*,,')
+docker run \
+  --network my-bridge \
+  --interactive \
+  --tty \
+  --init \
+  --rm \
+  --env SHELL=/bin/bash \
+  --env DISPLAY=$DOCKER0ADDR:${DISPLAY#*:} \
+  --env XAUTHORITY=$XAUTH \
+  --volume /etc/localtime:/etc/localtime:ro \
+  --volume $XAUTH:$XAUTH \
+  --volume $GITVOLUME/git:$MEHOME/git \
+  --volume $GITVOLUME/gitconfig:$MEHOME/.gitconfig \
+  --volume $USERSOCKDIR/ssh-agent.socket:$USERSOCKDIR/ssh-agent.socket:rw \
+  --volume $CODEVOLUME/config:$MEHOME/.config \
+  --volume $CODEVOLUME/bashrc:$MEHOME/.bashrc \
+  --volume $CODEVOLUME/pki:$MEHOME/.pki \
+  --volume $CODEVOLUME/vscode-insiders:$MEHOME/.vscode-insiders \
+  --volume $APPDIR:$MEHOME/app \
+  --user $myUID:$myGID \
+  --workdir $MEHOME \
+  --name $NAME \
+  $REGISTRY/$NAME \
+  bash -l

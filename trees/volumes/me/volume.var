@@ -1,0 +1,3 @@
+MEHOME /home/me
+myUID $(id -u)
+myGID $(id -g)

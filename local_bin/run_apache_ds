@@ -1,0 +1,6 @@
+#!/bin/bash
+
+exec \
+  env NAME=debian_krb5_x11_openjdk8 \
+  run_bash_c d me_x11_krb5 \
+  app/install-ads/ApacheDirectoryStudio/ApacheDirectoryStudio

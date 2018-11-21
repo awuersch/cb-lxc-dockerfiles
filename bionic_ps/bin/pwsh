@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+CMDDIR=$0
+env NAME=bionic_ps ${CMDDIR%/*}/../../bin/me/run_cmd

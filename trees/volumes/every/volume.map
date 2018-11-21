@@ -1,0 +1,4 @@
+/etc/localtime /etc/localtime ro
+/usr/share/i18n /usr/share/host-i18n ro
+/usr/share/locale /usr/share/host-locale ro
+/usr/share/terminfo /usr/share/host-terminfo ro

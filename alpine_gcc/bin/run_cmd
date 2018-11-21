@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+CMDDIR=$0
+exec env REGISTRY=infinitecoder NAME=gcc ${CMDDIR%/*}/../../bin/me/run_full_name_cmd "$@"

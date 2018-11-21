@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+. ${0%/*}/script_env
+
+# rm_all
+$REPO_DIR/bin/rm_all > ~/log/rm.$(date +%s).out 2>&1 
+
+# build_all
+$REPO_DIR/bin/build_all > ~/log/build.$(date +%s).out 2>&1 
+
+# push_all
+$REPO_DIR/bin/push_all > ~/log/push.$(date +%s).out 2>&1 

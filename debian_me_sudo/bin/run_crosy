@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+CMDDIR=$0
+exec env NAME=debian_crosy ${CMDDIR%/*}/../../bin/me_x11/run_trace_cmd bash -l

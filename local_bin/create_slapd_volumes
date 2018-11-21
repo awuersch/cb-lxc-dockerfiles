@@ -1,0 +1,31 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+(($#==1)) || {
+  >&2 echo "$0 domain"
+  exit 1
+}
+
+SLAPD_DOMAIN=$1
+
+VOLHOME=~/docker/volumes/slapd
+
+target=$VOLHOME/$SLAPD_DOMAIN
+[[ -d $target ]] && {
+  >&2 echo "$target already exists"
+  exit 1
+}
+
+mkdir -p $target
+cd $target
+mkdir -p etc/ldap var/lib/ldap var/backups/slapd-VERSION
+
+envvars=${target}.envvars
+echo 'REALM=${REALM:-'${SLAPD_DOMAIN}'.org}' > $envvars
+cat << 'EOF' >> ${target}.envvars
+LDAP_ROOTPASS="$(<./.ldap_admin_password)"
+LDAP_DOMAIN=$REALM
+LDAP_ORGANIZATION="${LDAP_ORGANIZATION:-Anthony Wuersch, Consultant}"
+LDAP_BACKEND=mdb
+EOF

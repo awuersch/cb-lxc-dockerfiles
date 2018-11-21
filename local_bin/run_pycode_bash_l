@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+# run pipenv_code from a container
+exec env NAME=buster_krb5_pg_pipenv_code run_bash_l iti me_pycode

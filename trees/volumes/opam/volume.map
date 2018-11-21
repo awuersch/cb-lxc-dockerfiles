@@ -1,0 +1,2 @@
+opam $MEHOME/.opam rw
+ocamlinit $MEHOME/.ocamlinit rw

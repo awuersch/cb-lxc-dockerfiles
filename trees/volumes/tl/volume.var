@@ -1,0 +1,3 @@
+PREFIX=/usr/local
+TEXBASE=$PREFIX/texlive
+PATH=$TEXBASE/2018/bin/x86_64-linux:$PATH

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+# preload some images
+for img in \
+  buster_me_sudo \
+  buster_krb5 \
+  buster_krb5_pg_pipenv_code \
+  buster_krb5_x11 \
+  buster_krb5_x11_openjdk8 \
+  buster_krb5_firefox \
+  buster_cfssl
+do
+  docker pull ${REGISTRY:-rg1.tony.wuersch.name:443}/$img
+done
+docker pull sameersbn/squid:3.5.27-1

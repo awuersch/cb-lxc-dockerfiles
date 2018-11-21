@@ -1,0 +1,1 @@
+ssh-agent.socket $USERSOCKDIR/ssh-agent.socket rw

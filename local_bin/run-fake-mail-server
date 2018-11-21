@@ -1,0 +1,29 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+NETWORK=my-bridge
+NAME=fake_mail_server
+
+# small image
+IMAGE=python:alpine3.7
+
+# microblog book rec: CMD="python -m smtpd -n -c DebuggingServer $NAME:8025"
+# but smtp is "deprecated", so we try aiosmtpd
+
+# NOTE:
+#   -u arg to python unbuffers stdout and stderr
+#   -n arg to aiosmtpd [ not needed here ] prevents call to setuid,
+#      so a non-root user can use the module
+#
+#   the aiosmtpd Debugging handler outputs only to stdout.
+#
+# unbuffered is better when stdout/stderr goes to a docker container log.
+# otherwise, the log looks incomplete in real time.
+
+# TODO: build a new image to avoid pip3 callout
+PIPCMD="pip3 install aiosmtpd"
+PYCMD="python -u -m aiosmtpd -c aiosmtpd.handlers.Debugging -l $NAME:8025"
+CMD="$PIPCMD && $PYCMD"
+
+docker run --network $NETWORK --detach --rm --name $NAME $IMAGE sh -c "$CMD"

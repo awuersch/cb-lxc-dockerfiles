@@ -1,0 +1,52 @@
+# SCRIPT ENVIRONMENT VARIABLES
+
+# kerberos realm
+REALM=${REALM:-tony.wuersch.name}
+
+# bugtracker db password file
+BTPASS=${BTPASS:-~/.btpass}
+
+# project directory
+PROJ_DIR=${PROJ_DIR:-~/proj}
+
+# home directory of my github repos
+MYREPOS_DIR=${MYREPOS_DIR:-~/src/git/github.com/awuersch}
+
+# docker container repo
+REPO_DIR=${REPO_DIR:-$MYREPOS_DIR/cb-lxc-dockerfiles}
+
+# functions
+VOLIDSMAP=$REPO_DIR/local_bin/volumeids.map
+function getvolumeids { # label
+  typeset label=$1
+  typeset pat="^$label "
+  echo $(grep "$pat" $VOLIDSMAP | cut -d' ' -f 2-)
+}
+
+function longdesc { # cmd
+  typeset cmd=$1
+  >&2 cat << EOF
+second argument options (filling in 'docker run' flags):
+  'i' -- '--interactive'
+  'it' -- '--interactive --tty'
+  'iti' -- '--interactive --tty --init'
+  'd' -- '--detach'
+  'di' -- '--detach --init'
+  'init-only' -- '--init'
+files used:
+  \$REPO_DIR/local_bin/volumeids.map -- maps labels to volume id lists
+environment variables affecting ${cmd##*/}:
+  NAME [required] -- the container image to run
+  DO_RUN_CMD [optional, try 'show_run'] -- 'do_run' replacement
+  TRACE [optional] -- if set to 'on', enables Linux strace
+  REGISTRY [optional] -- your docker registry
+  PROJ_BASE_DIR [optional] -- project directory base
+  VOL_BASE_DIR [optional] -- volumes directory base
+  REPO_DIR [optional] -- repository directory base
+  APPDIR [optional] -- your application work directory
+  DOCKER_RUN_CMD [optional] -- runs instead of 'docker run'
+EOF
+}
+
+# extend path
+export PATH=$REPO_DIR/bin/run:$PATH

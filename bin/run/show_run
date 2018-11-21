@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+CONTAINER_DIR=${CONTAINER_DIR:-~/src/git/github.com/awuersch/cb-lxc-dockerfiles}
+REGISTRY=${REGISTRY:-rg1.tony.wuersch.name:443}
+env \
+  PROJ_BASE_DIR=$CONTAINER_DIR/trees/proj \
+  VOL_BASE_DIR=$CONTAINER_DIR/trees/volumes \
+  DOCKER_RUN_CMD=echo \
+  do_run "$@" \
+  | sed "s,$CONTAINER_DIR/trees/proj,\$PROJBASE,g;s,$CONTAINER_DIR/trees/volumes,\$VOLBASE,g;s,/home/me,\$MEHOME,g;s,$REGISTRY,\$REGISTRY,g"

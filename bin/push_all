@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+REPO_DIR=${REPO_DIR:-~/src/git/github.com/awuersch/cb-lxc-dockerfiles}
+SCRIPT_ENV=${SCRIPT_ENV:-$REPO_DIR/bin/script_env}
+. $SCRIPT_ENV
+
+for container in $(inorder)
+do
+  echo pushing $container
+  docker push $REGISTRY/$container
+done

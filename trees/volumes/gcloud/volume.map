@@ -1,0 +1,5 @@
+config:$MEHOME/.config \
+boto:$MEHOME/.boto \
+Downloads:$MEHOME/Downloads \
+certs:$MEHOME/certs \
+usr_local_bin:/usr/local/bin \

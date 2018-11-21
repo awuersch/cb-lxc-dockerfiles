@@ -1,0 +1,10 @@
+#! /bin/bash
+
+set -euf -o pipefail
+
+exec docker run \
+  --network my-bridge \
+  --detach \
+  --name coredns \
+  --volume ~/proj/coredns:/root \
+  coredns/coredns:latest

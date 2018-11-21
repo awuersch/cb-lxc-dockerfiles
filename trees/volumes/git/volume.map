@@ -1,0 +1,2 @@
+git $MEHOME/git rw
+gitconfig $MEHOME/.gitconfig ro

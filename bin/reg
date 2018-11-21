@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+CMD=$1
+REPO=$2
+
+REPO_DIR=${REPO_DIR:-~/src/git/github.com/awuersch/cb-lxc-dockerfiles}
+SCRIPT_ENV=${SCRIPT_ENV:-$REPO_DIR/bin/script_env}
+. $SCRIPT_ENV
+
+docker run -it --rm jess/reg $CMD \
+  --username $REGISTRY_USER --password $REGISTRY_PASSWORD $REPO

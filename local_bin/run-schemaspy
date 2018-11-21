@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+. ${0%/*}/script_env
+
+# run schemaspy 6.1.0 on mantisbt db "bugtracker" in postgres
+# TODO: create a new bt_meta.xml file to capture foreign key relationships
+#   see https;//tony.wuersch.name/schemaspy/bt_meta.xml
+
+# the -vizjs flag generates diagrams without requiring graphviz
+
+docker run \
+  --volume $PROJ_DIR/schemaspy/btnew:/output \
+  --volume ~/etc/schemaspy:/etc/schemaspy \
+  schemaspy/schemaspy:latest \
+    -t pgsql \
+    -db bugtracker \
+    -host db1.$REALM \
+    -meta /etc/schemaspy/bt_meta.xml \
+    -port 5432 \
+    -u www \
+    -p $(<$BTPASS) \
+    -vizjs

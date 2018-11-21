@@ -1,0 +1,8 @@
+#!/bin/bash 
+
+[[ -v NAME ]] || {
+  >&2 echo "NAME is undefined; please set it."
+  exit 1
+}
+
+exec env TRACE=on do_bash_l "$@"

@@ -1,0 +1,37 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+(($#==1)) || {
+  >&2 echo "$0 domain"
+  exit 1
+}
+domain=$1
+
+. ${0%/*}/script_env
+
+REGISTRY=rg1.tony.wuersch.name:443
+VOLHOME=~/docker/volumes/slapd
+target=$VOLHOME/$domain
+envvars=${target}.envvars
+
+[[ -d $target && -f $envvars ]] || {
+  >&2 echo "$target or $envvars not found - exiting"
+  exit 1
+}
+
+cd $VOLHOME
+. $envvars
+cd $domain
+docker run \
+  --name slapd-$domain \
+  --network my-bridge \
+  --detach \
+  --volume $target/etc/ldap:/etc/ldap \
+  --volume $target/var/lib/ldap:/var/lib/ldap \
+  --volume $target/var/backups/slapd-VERSION:/var/backups/slapd-VERSION \
+  --env LDAP_ROOTPASS="$LDAP_ROOTPASS" \
+  --env LDAP_DOMAIN="$LDAP_DOMAIN" \
+  --env LDAP_ORGANIZATION="$LDAP_ORGANIZATION" \
+  $REGISTRY/buster_slapd \
+  empty.sh

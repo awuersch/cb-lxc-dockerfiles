@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+REPO_DIR=${REPO_DIR:-~/src/git/github.com/awuersch/cb-lxc-dockerfiles}
+SCRIPT_ENV=${SCRIPT_ENV:-$REPO_DIR/bin/script_env}
+. $SCRIPT_ENV
+
+for image in $(revorder)
+do
+  echo removing $image
+  docker image rm $REGISTRY/$image || true
+done

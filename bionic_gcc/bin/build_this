@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+REGISTRY=${REGISTRY-"rg1.tony.wuersch.name:443"}
+REPO=${REPO-"bionic_gcc"}
+IFS='/' read -a CMDPATH <<< "$(dirname $0)"
+docker build -t $REGISTRY/$REPO .

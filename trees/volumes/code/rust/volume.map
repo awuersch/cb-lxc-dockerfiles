@@ -1,0 +1,4 @@
+bashrc $MEHOME/.bashrc ro
+config $MEHOME/.config rw
+pki $MEHOME/.pki rw
+vscode-insiders $MEHOME/.vscode-insiders rw

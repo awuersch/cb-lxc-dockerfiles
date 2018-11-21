@@ -1,0 +1,14 @@
+#! /bin/bash
+
+set -euf -o pipefail
+
+docker run \
+  --network my-bridge \
+  --detach \
+  --restart=always \
+  --name squid \
+  --publish $(dig $(uname -n).lxd +short):3128:3128/tcp \
+  --volume ~/docker/volumes/squid/etc/squid/squid.conf:/etc/squid/squid.conf \
+  --volume ~/docker/volumes/squid/log:/var/log/squid \
+  --volume ~/docker/volumes/squid/cache:/var/spool/squid \
+  sameersbn/squid:3.5.27-1

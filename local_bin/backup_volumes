@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -eu -o pipefail
+
+GZT=volumes.tar.gz
+cd ~/docker
+tar czf ~/$GZT volumes
+d="$(echo -n /mnt/chromeos/rem*/*/backups)"
+cp ~/$GZT "$d/$(date +%s).$GZT"

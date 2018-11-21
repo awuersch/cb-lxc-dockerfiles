@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+ORDER=$1
+CMD=$2
+
+REPO_DIR=${REPO_DIR:-~/src/git/github.com/awuersch/cb-lxc-dockerfiles}
+SCRIPT_ENV=${SCRIPT_ENV:-$REPO_DIR/bin/script_env}
+. $SCRIPT_ENV
+
+for container in $($ORDER)
+do
+  echo $CMD $container from $REGISTRY
+  $REPO_DIR/bin/reg $CMD $REGISTRY/$container || true
+done

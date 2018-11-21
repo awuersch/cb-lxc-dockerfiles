@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+NAME=alpine_go
+DOCKERNAME=golang:alpine
+APPDIR="${APPDIR:-$HOME/proj/$NAME}"
+
+[[ -d $APPDIR ]] || {
+  >&2 echo "$APPDIR does not exist; please create it."
+  exit 1
+}
+
+set -x
+docker run \
+  --network my-bridge \
+  --rm \
+  --env SHELL=/bin/bash \
+  --volume /etc/localtime:/etc/localtime:ro \
+  --volume $APPDIR:/go/app \
+  --name $NAME \
+  $DOCKERNAME "$@"

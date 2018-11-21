@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+if [[ ${0%/*} == $0 ]]; then dir=$PWD; else dir=${0%/*}; fi
+. $dir/script_env
+
+usage="$0 ['i'|'it'|'iti'|'d'|'di'|'init-only'] volumeslabel"
+(($#==2)) || {
+  >&2 echo "usage: $usage"
+  longdesc "$0"
+  exit 1
+}
+
+mode=$1
+label=$2
+
+ids="$(getvolumeids $label)"
+[[ -z "$ids" ]] && {
+  >&2 echo "label=$label is unmapped"
+  >&2 echo "mapped labels are: $(cut -d' ' -f1 $VOLIDSMAP | tr '\n' ' ')"
+  exit 1
+}
+
+# run container
+exec do_bash_l $mode "$ids"

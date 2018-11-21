@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+REPO_DIR=${REPO_DIR:-~/src/git/github.com/awuersch/cb-lxc-dockerfiles}
+$REPO_DIR/bin/bulk_registry revorder "$@"

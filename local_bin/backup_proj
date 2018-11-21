@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -eu -o pipefail
+
+GZT=proj.tar.gz
+cd ~
+tar czf $GZT proj
+d="$(echo /mnt/chromeos/rem*/*/backups)"
+cp $GZT "$d/$(date +%s).$GZT"

@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+[[ -v NAME ]] || {
+  >&2 echo "NAME is undefined; please set it."
+  exit 1
+}
+
+usage="$0 cmdmode volumeids"
+(($#==2)) || {
+  >&2 echo "usage: $usage"
+  exit 1
+}
+
+# get volume ids
+mode=$1
+ids="$2"
+shift
+shift
+
+# set this so one can mock do_run with show_run
+DO_RUN_CMD=${DO_RUN_CMD:-do_run}
+
+# call with other args
+$DO_RUN_CMD $mode "$ids" bash -l

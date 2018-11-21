@@ -1,0 +1,91 @@
+# docker run script generation bash include script
+
+VOLBASENAME=${VOLBASENAME:-VOLBASE}
+
+function getvolumedir { # id base
+  typeset id=$1 base=$2 f= d=
+
+  # added -maxdepth 3 to not find volume.id in a git tree skeleton
+  f=$(find $base -maxdepth 3 -name volume.id -print | xargs grep -l "^${id}$")
+  d=${f%/*}
+  echo ${d#$base/}
+}
+
+function emitvolumes { # id base dir
+  typeset id=$1 file=$2/volume.map
+
+  [[ -f $file ]] && {
+    # ASSERT: each $dir/volume.map line has three columns
+    while read src tgt mode
+    do
+      echo -n '--volume '
+      # add if src is a relative path, i.e., not starting with '/' or '$'
+      [[ ${src#[/$]} == $src ]] && echo -n '$'"$id"'VOLUME/'
+      echo $src:$tgt:$mode
+    done < $file
+  }
+}
+
+function emitvars { # id base dir
+  typeset id=$1 base=$2 dir=$3
+  typeset file=$base/$dir/volume.var
+
+  # emit variable assignments
+  # SHOULD: each volume.var line has a variable assignment
+  [[ -f $file ]] && sed 's/ /=/' $file
+
+  # emit volume var
+  echo "${id}"'VOLUME=$'"${VOLBASENAME}/${dir}"
+}
+
+function emitallvars { # base id ...
+  typeset base=$1
+  shift
+  echo "${VOLBASENAME}=${base}"
+  for id in $*; do
+    typeset dir=$(getvolumedir $id $base)
+    emitvars $id $base $dir
+  done
+}
+
+function emitdevices { # dir
+  typeset file=$1/volume.device
+  # SHOULD: each volume.device line has a device file path
+  [[ -f $file ]] && sed 's/^/--device /' $file
+}
+
+function emitenvs { # dir
+  # ASSERT: each $dir/volume.env line has two columns
+  typeset file=$1/volume.env
+  [[ -f $file ]] && sed 's/ /=/;s/^/--env /' $file
+}
+
+function emituser { # dir
+  # ASSERT: each $dir/volume.user line has two columns
+  typeset file=$1/volume.user
+  [[ -f $file ]] && sed 's/ /:/;s/^/--user /' $file
+}
+
+function emitwd { # dir
+  # ASSERT: each $dir/volume.user line has one columns
+  typeset file=$1/volume.workdir
+  [[ -f $file ]] && sed 's/^/--workdir /' $file
+}
+
+function emitargs { # base id ...
+  typeset base=$1
+  shift
+  for id in $*; do
+    typeset dir=$(getvolumedir $id $base)
+    emitdevices $base/$dir
+    emitenvs $base/$dir
+    emitvolumes $id $base/$dir
+    emituser $base/$dir
+    emitwd $base/$dir
+  done | tr '\n' ' '
+}
+
+function emitall { # base id ...
+  emitallvars $*
+  emitargs $*
+}

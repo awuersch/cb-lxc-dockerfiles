@@ -1,0 +1,33 @@
+REGISTRY=${REGISTRY:-rg1.tony.wuersch.name:443}
+IMAGE_ORDER=${IMAGE_ORDER:-$REPO_DIR/bin/image.order}
+PASSWORDFILE=${PASSWORDFILE:-~/.mypass}
+REGISTRY_PASSWORD=${REGISTRY_PASSWORD:-$(cut -f2 $PASSWORDFILE)}
+REGISTRY_USER=${REGISTRY_USER:-$(cut -f1 $PASSWORDFILE)}
+SQUID_URL=${SQUID_URL:-http://$(uname -n).lxd:3128}
+
+# "depends on" precedes depends
+function inorder { #
+  tsort < $IMAGE_ORDER
+}
+
+# "depends on" follows depends
+function revorder { #
+  awk '{print $2,$1}' $IMAGE_ORDER | tsort
+}
+
+function squidifnot { #
+  docker container inspect squid 1>/dev/null 2>&1 || {
+    >&2 echo 'squid not found; starting squid, then sleep 5 secs'
+    $REPO_DIR/local_bin/run-squid
+    sleep 5
+  }
+}
+
+function squidbuild { # name
+  typeset name=$1
+  docker build -t $name \
+    --build-arg http_proxy=$SQUID_URL \
+    --build-arg https_proxy=$SQUID_URL \
+    --build-arg ftp_proxy=$SQUID_URL \
+    .
+}

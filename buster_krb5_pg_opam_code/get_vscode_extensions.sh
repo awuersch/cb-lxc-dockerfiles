@@ -1,0 +1,24 @@
+code-insiders --install-extension ms-python.python
+code-insiders --install-extension ms-vscode.cpptools
+code-insiders --install-extension ms-vscode.go
+code-insiders --install-extension freebroccolo.reasonml
+code-insiders --install-extension PeterJausovec.vscode-docker
+code-insiders --install-extension redhat.vscode-yaml
+code-insiders --install-extension eamodio.gitlens
+code-insiders --install-extension robertohuertasm.vscode-icons
+code-insiders --install-extension Zignd.html-css-class-completion
+code-insiders --install-extension ecmel.vscode-html-css
+code-insiders --install-extension codezombiech.gitignore
+code-insiders --install-extension IBM.output-colorizer
+code-insiders --install-extension donjayamanne.git-extension-pack
+code-insiders --install-extension formulahendry.docker-extension-pack
+code-insiders --install-extension foxundermoon.shell-format
+code-insiders --install-extension donjayamanne.githistory
+code-insiders --install-extension Shan.code-settings-sync
+code-insiders --install-extension Equinusocio.vsc-material-theme
+code-insiders --install-extension yzhang.markdown-all-in-one
+code-insiders --install-extension anseki.vscode-color
+code-insiders --install-extension shd101wyy.markdown-preview-enhanced
+code-insiders --install-extension PKief.material-icon-theme
+
+code-insiders --list-extensions --show-versions
