@@ -539,7 +539,7 @@ This command:
 * in working directory `$MEHOME`,
 * with a Docker volume pointing to a password file at `$MEHOME/.pgpass`.
 
-We can find volumeslabel `me_pg` in `$REPO_DIR/local_bin/volumeids.map`.
+Volumeslabel `me_pg` can be found in `$REPO_DIR/local_bin/volumeids.map`.
 ```
 $ grep me_pg local_bin/volumeids.map
 me_pg EVERY ME PG
@@ -689,7 +689,7 @@ $ env DO_RUN_CMD=show_run NAME=alpine_pg run_bash_c iti me_pg "psql -h my_host -
 Unfortunately, the output is all on one line.
 Output all on one line is very inconvenient to view.
 
-We can format this output further by
+One can format this output further by
 piping it through Linux command `fmt`.
 `fmt` breaks lines on spaces.
 It also
