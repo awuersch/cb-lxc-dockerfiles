@@ -675,11 +675,11 @@ and `--workdir` arguments
 to `docker run`
 respectively.
 
-Now that we've had a look
-at some `volume.*` files,
+We've had a look
+at some `volume.*` files.
 Here is
 our example `run_bash_c` command
-with `DO_RUN_CMD` set,
+with `DO_RUN_CMD=show_run`,
 and its output.
 ```
 $ env DO_RUN_CMD=show_run NAME=alpine_pg run_bash_c iti me_pg "psql -h my_host -U my_user mydb"
