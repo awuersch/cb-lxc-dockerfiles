@@ -16,7 +16,6 @@ COPY opam_init.sh /usr/local/bin/opam_init.sh
 
 RUN /usr/local/bin/clean-install \
 	git \
-	util-linux \
 	mercurial \
 	darcs \
 	pkg-config \

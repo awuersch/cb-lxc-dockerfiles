@@ -29,6 +29,8 @@ RUN /usr/local/bin/clean-install \
 	ncurses-bin \
 	perl \
 	dialog \
+	tzdata \
+	util-linux \
 	sudo
 
 RUN echo "$UNAME ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/$UNAME \

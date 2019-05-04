@@ -9,7 +9,6 @@ LABEL maintainer="Tony Wuersch <tony.wuersch@gmail.com>" distro="debian" distro_
 RUN /usr/local/bin/clean-install \
 	dirmngr \
 	gnupg \
-	util-linux \
 	&& apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 0AB215679C571D1C8325275B9BDB3D89CE49EC21 \
 	&& echo "deb http://ppa.launchpad.net/mozillateam/firefox-next/ubuntu xenial main" >> /etc/apt/sources.list.d/firefox.list \
  && /usr/local/bin/clean-install \

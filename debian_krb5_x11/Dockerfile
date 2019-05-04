@@ -7,7 +7,6 @@ FROM rg1.tony.wuersch.name:443/debian_krb5
 LABEL maintainer="Tony Wuersch <tony.wuersch@gmail.com>" distro="debian" distro_long="debian-stretch" arch="x86_64" krb5_version="1.16-2"
 
 RUN /usr/local/bin/clean-install \
-	util-linux \
 	libasound2 \
 	libpulse0 \
 	x11-utils \

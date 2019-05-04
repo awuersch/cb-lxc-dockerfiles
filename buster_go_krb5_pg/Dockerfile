@@ -9,7 +9,6 @@ LABEL maintainer="Tony Wuersch <tony.wuersch@gmail.com>" distro_style="apt" dist
 ARG DEBIAN_FRONTEND=noninteractive
 RUN /usr/local/bin/clean-install \
 	git \
-	util-linux \
 	postgresql-client-11
 
 ARG USER=me

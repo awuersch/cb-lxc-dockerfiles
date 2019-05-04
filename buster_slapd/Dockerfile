@@ -31,7 +31,6 @@ LABEL maintainer="Tony Wuersch <tony.wuersch@gmail.com>" distro="debian" distro_
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN /usr/local/bin/clean-install \
-	util-linux \
 	procps \
 	psmisc \
 	bash-completion \

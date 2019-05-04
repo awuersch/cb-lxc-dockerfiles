@@ -110,9 +110,9 @@ Crostini on a Chromebook. Crostini wraps its Linux users
 in LXC containers. The default user of an LXC container
 under Crostini has UID and GID 1000.
 
-A related decision is to give `sudo` power to the
-local user, so the local user can switch to root when
-needed.
+### "Me" has Sudo Rights to Switch to Root
+
+The local user can switch to root when needed.
 
 We enter
 many containers
