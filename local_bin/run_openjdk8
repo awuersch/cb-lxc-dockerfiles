@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+env NAME=debian_krb5_x11_openjdk8 run_bash_l iti me_x11_krb5_git

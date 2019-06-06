@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+env NAME=buster_go run_bash_l iti me_go_git
