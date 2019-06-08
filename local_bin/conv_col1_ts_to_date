@@ -1,0 +1,11 @@
+#! /bin/bash
+
+set -euf -o pipefail
+
+# -F"," and OFS="," if comma-separated
+# gawk -F"," '{OFS=","; $1=strftime("%Y-%m-%d %H:%M:%S", $1); print $0}'
+
+# no decimal pt
+# gawk '{$1=strftime("%Y-%m-%d %H:%M:%S", $1); print $0}'
+
+gawk '{split($1,a,"."); $1=strftime("%Y-%m-%d %H:%M:%S", a[1]) "." a[2]; print $0}'
