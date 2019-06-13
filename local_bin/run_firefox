@@ -2,5 +2,5 @@
 
 exec \
   env NAME=buster_krb5_firefox \
-  run_bash_c d me_x11_krb5 \
+  run_bash_c d me_x11_krb5_firefox \
   "apulse firefox"
