@@ -30,8 +30,9 @@ RUN /usr/local/bin/clean-install \
 	perl \
 	dialog \
 	tzdata \
+	sudo \
 	util-linux \
-	sudo
+	ldnsutils
 
 RUN echo "$UNAME ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/$UNAME \
   && chmod 440 /etc/sudoers.d/$UNAME \

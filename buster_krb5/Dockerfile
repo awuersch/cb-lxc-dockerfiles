@@ -17,6 +17,7 @@ RUN /usr/local/bin/clean-install \
 	krb5-k5tls \
 	krb5-pkinit \
 	openssh-client \
+	ldnsutils \
 	pwgen \
 	mosh \
 	make
