@@ -1,0 +1,9 @@
+#! /usr/bin/bash
+set -euf -o pipefail
+docker run \
+  -it --rm --init \
+  --volume /home/tony/proj/stacks-dars-mkl:/tmp/app \
+  --volume /home/tony/docker/volumes/git/git:/tmp/git \
+  --name mklclr \
+  clearlinux/stacks-dars-mkl \
+  bash -c '"/tmp/app/setup.sh"'

@@ -2,11 +2,13 @@
 
 set -euf -o pipefail
 
+# note: container user 'clr' is already 1000:1000, so default is ok
+# we add --privileged /dev:/dev as per documentation for mixer --native
+
 docker run -it --rm \
   --privileged \
   --volume /dev:/dev \
   --volume /home/tony/proj/clr-sdk:/home/clr/app \
   --volume /home/tony/proj/clr-sdk/mix:/home/clr/mix \
-  --id $(id -u):$(id -g) \
-  clearlinux:clr-sdk \
+  clearlinux/clr-sdk \
   --mixdir=/home/clr/mix
