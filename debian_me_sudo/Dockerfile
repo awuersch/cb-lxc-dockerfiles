@@ -29,7 +29,10 @@ RUN /usr/local/bin/clean-install \
 	ncurses-bin \
 	perl \
 	dialog \
-	sudo
+	tzdata \
+	sudo \
+	util-linux \
+	ldnsutils
 
 RUN echo "$UNAME ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/$UNAME \
   && chmod 440 /etc/sudoers.d/$UNAME \
