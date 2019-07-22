@@ -3,8 +3,10 @@
 set -euf -o pipefail
 
 function get_docker { #
+    sudo apt-get update
     sudo apt-get install \
-            gnupg2 \
+            curl \
+            gnupg \
             software-properties-common -y
 
     curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -

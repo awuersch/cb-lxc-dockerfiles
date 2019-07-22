@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+REGISTRY=${REGISTRY-"rg1.tony.wuersch.name:443"}
+REPO=${REPO-"debian_krb5_x11_openjdk8_gradle"}
+IFS='/' read -a CMDPATH <<< "$(dirname $0)"
+export DOMAIN=tony.wuersch.name
+docker build -t $REGISTRY/$REPO .

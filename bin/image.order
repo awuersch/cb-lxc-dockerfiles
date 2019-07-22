@@ -4,6 +4,7 @@ debian_me_sudo debian_gcloud
 debian_me_sudo debian_krb5
 debian_krb5 debian_krb5_x11
 debian_krb5_x11 debian_krb5_x11_openjdk8
+debian_krb5_x11_openjdk8 debian_krb5_x11_openjdk8_gradle
 buster_base buster_me_sudo
 buster_me_sudo buster_mesa
 buster_me_sudo buster_gcc
@@ -14,6 +15,7 @@ buster_krb5 buster_krb5_pg
 buster_krb5 buster_krb5_firefox
 buster_krb5 buster_krb5_x11
 buster_krb5_x11 buster_krb5_x11_openjdk11
+buster_krb5_x11_openjdk11 buster_krb5_x11_openjdk11_gradle
 buster_krb5_pg buster_krb5_pg_pipenv
 buster_krb5_pg_pipenv buster_krb5_pg_pipenv_code
 buster_krb5_pg buster_krb5_pg_opam
