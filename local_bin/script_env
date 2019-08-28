@@ -50,3 +50,7 @@ EOF
 
 # extend path
 export PATH=$REPO_DIR/bin/run:$PATH
+
+# bridge ip
+DOCKER_BRIDGE=my-bridge
+BRIDGE_IP="$(docker inspect $DOCKER_BRIDGE | jq -r '.[0].IPAM.Config[0].Gateway')"

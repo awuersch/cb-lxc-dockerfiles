@@ -18,6 +18,7 @@ do
     ./build.sh
   else
     docker image inspect $REGISTRY/$image 1>/dev/null 2>&1 || \
-    squidbuild $REGISTRY/$image
+    squidbuild $REGISTRY/$image || \
+    true
   fi
 done

@@ -1,0 +1,16 @@
+#! /bin/bash
+
+set -euf -o pipefail
+
+docker run -it --rm \
+  -v $XDG_RUNTIME_DIR:$XDG_RUNTIME_DIR \
+  -v /tmp/.X11-unix:/tmp/.X11-unix \
+  -v /dev/shm:/dev/shm \
+  -v /dev/sr0:/dev/sr0 \
+  -e DISPLAY=unix$DISPLAY \
+  -e PULSE_SERVER=unix:$XDG_RUNTIME_DIR/pulse/native \
+  -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+  --user 1000:1000 \
+  --workdir /home/me \
+  rg1.tony.wuersch.name:443/buster_me_sudo \
+  bash -l
