@@ -21,6 +21,7 @@ buster_krb5_pg_pipenv buster_krb5_pg_pipenv_code
 buster_krb5_pg buster_krb5_pg_opam
 buster_krb5_pg_opam buster_krb5_pg_opam_code
 buster_gcc buster_tl
+buster_tl buster_tl_bookdown
 buster_tl buster_tl_code
 alpine_me_sudo alpine_krb5
 alpine_me_sudo alpine_pg
