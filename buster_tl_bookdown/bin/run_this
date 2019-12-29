@@ -15,7 +15,9 @@ CMD=${CMD:-"bash -i"}
 }
 
 MEHOME=/home/me
-TEXVOLUME=$HOME/docker/volumes/tl
+VOLUMES=$HOME/docker/volumes
+TEXVOLUME=$VOLUMES/tl
+RVOLUME=$VOLUMESs/R
 PREFIX=/usr/local
 TEXBASE=$PREFIX/texlive
 CMDENV=("PATH=$TEXBASE/2018/bin/x86_64-linux:\$PATH")
@@ -29,6 +31,8 @@ docker run \
   --volume /tmp/.X11-unix:/tmp/.X11-unix:rw \
   --volume /tmp/X1M-unix:/tmp/X1M-unix:rw \
   --volume $TEXVOLUME/texlive:$TEXBASE:rw \
+  --volume $RVOLUME/R:/etc/R:rw \
+  --volume $RVOLUME/site-library:/usr/local/lib/R/site-library:rw \
   --volume $APPDIR:$MEHOME/app:rw \
   --user 1000:1000 \
   --workdir $MEHOME \
