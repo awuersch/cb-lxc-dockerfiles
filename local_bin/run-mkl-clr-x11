@@ -6,18 +6,34 @@ set -euf -o pipefail
 
 # REGISTRY=clearlinux
 REGISTRY=rg1.tony.wuersch.name:443
-# REPO=stacks-dar-mkl
+# REPO=stacks-dars-mkl
+# REPO=mkl-rstudio
 # REPO=mklclr_me_sudo
 # REPO=mklclr_rstudio
 REPO=mkl-rstudio
 # NAME=mklclr
+# NAME=mkl-rstudio
 # NAME=mklclr_me_sudo
+# NAME=stacks-dars-mkl
 NAME=mkl-rstudio
-# NAME=mklclr_me_sudo
+
+#  --user 1000:1000 \
+#  --workdir /home/clr \
 
 docker run \
   -it --rm --init \
+  --env DISPLAY=unix$DISPLAY \
+  --env WAYLAND_DISPLAY=$WAYLAND_DISPLAY \
+  --env XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+  --env XDG_SESSION_TYPE=wayland \
+  --env GDK_BACKAND=wayland \
+  --env QT_QPA_PLATFORM=wayland \
+  --env SDL_VIDEODRIVER=wayland \
   --env HOME=/home/clr \
+  --device /dev/snd \
+  --device /dev/dri/card0 \
+  --device /dev/dri/renderD128 \
+  --volume $XDG_RUNTIME_DIR:$XDG_RUNTIME_DIR \
   --volume /home/tony/proj/stacks-dars-mkl:/tmp/app \
   --volume /home/tony/docker/volumes/git/git:/tmp/git \
   --volume /home/tony/docker/volumes/tl:/tmp/tl \

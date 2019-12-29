@@ -9,7 +9,7 @@ LABEL maintainer="Tony Wuersch <tony.wuersch@gmail.com>" \
 	distro_long="debian-buster" \
 	arch="amd_64"
 
-ARG GOLANG_VERSION=1.12.5
+ARG GOLANG_VERSION=1.13.1
 ARG URL=https://dl.google.com/go/go${GOLANG_VERSION}.linux-amd64.tar.gz
 ARG USER=me
 ARG MEHOME=/home/$USER

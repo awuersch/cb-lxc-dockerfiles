@@ -12,12 +12,12 @@ LABEL maintainer="Tony Wuersch <tony.wuersch@gmail.com>" \
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
     PATH=/usr/local/cargo/bin:$PATH \
-    RUST_VERSION=1.31.1
+    RUST_VERSION=1.38.0
 
 RUN set -eux; \
     rustArch='x86_64-unknown-linux-gnu'; \
-    rustupSha256='2d4ddf4e53915a23dda722608ed24e5c3f29ea1688da55aa4e98765fc6223f71'; \
-    basePath="https://static.rust-lang.org/rustup/archive/1.16.0"; \
+    rustupSha256='36285482ae5c255f2decfab27d32ba19465804cb3ddf5a23e6ff2a7b0f6e0250'; \
+    basePath="https://static.rust-lang.org/rustup/archive/1.19.0"; \
     curl -k -L -o rustup-init "${basePath}/${rustArch}/rustup-init"; \
     echo "${rustupSha256} *rustup-init" | sha256sum -c -; \
     chmod +x rustup-init; \
