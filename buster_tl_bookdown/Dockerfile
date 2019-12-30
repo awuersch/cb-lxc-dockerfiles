@@ -43,5 +43,5 @@ RUN /usr/local/bin/clean-install \
     r-cran-tidyverse \
     r-cran-rcppeigen \
     r-cran-bh
-RUN R --slave -e 'install.packages(c("rstan"));'
-RUN R --slave -e 'install.packages(c("bookdown","blogdown"));'
+RUN R --slave -e \
+    'update.packages(lib.loc="/usr/lib/R/library",ask=FALSE,checkBuilt=TRUE)'
