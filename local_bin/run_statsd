@@ -1,0 +1,33 @@
+#! /bin/bash
+set -euf -o pipefail
+
+#
+# use "socat UDP4-LISTEN:localhost:8125 UDP4:<ip>:8125" from honey sender
+#
+# docker inspect -f \
+#  '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
+#  statsd
+#
+# will get the ip address of this container
+#
+
+P=/home/tony/proj/statsd
+VD=/home/tony/docker/volumes/statsd
+docker run -d \
+ --network my-bridge \
+ --name statsd \
+ -p 80:80 \
+ -p 2003-2004:2003-2004 \
+ -p 2023-2024:2023-2024 \
+ -p 8125:8125/udp \
+ -p 8126:8126 \
+ -v $P:/root/app:rw \
+ -v $VD/graphite/conf:/opt/graphite/conf:rw \
+ -v $VD/graphite/storage:/opt/graphite/storage:rw \
+ -v $VD/graphite/custom:/opt/graphite/webapp/graphite/functions/custom:rw \
+ -v $VD/statsd/config:/opt/statsd/config:rw \
+ -v $VD/logrotate.d:/etc/logrotate.d:rw \
+ -v $VD/log:/var/log:rw \
+ graphiteapp/graphite-statsd
+
+# -v $VD/nginx:/etc/nginx

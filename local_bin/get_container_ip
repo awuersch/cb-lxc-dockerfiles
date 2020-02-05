@@ -1,0 +1,11 @@
+#! /bin/bash
+set -euf -o pipefail
+
+(($#==0)) && {
+  2>& echo "usage: $0 container-or-id"
+  exit 1
+}
+
+docker inspect -f \
+ '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
+ $1

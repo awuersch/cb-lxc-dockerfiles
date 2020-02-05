@@ -1,0 +1,12 @@
+#! /usr/bin/bash
+set -euf -o pipefail
+
+# create a tunnel from localhost:8125 to a container listing on 8125
+# -- the statsd port
+# in this way, a statsd client called with no args can talk to statsd.
+
+(($#==0)) && {
+  >2& echo "usage: $0 ip"
+  exit 1
+}
+nohup socat UDP4-LISTEN:8125 UDP4:$1:8125 > /dev/null 2>&1 &
