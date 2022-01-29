@@ -1,0 +1,19 @@
+#! /usr/bin/env bash
+set -euf -o pipefail
+
+# run julia rootless, using ~/docker/julia as home directory
+docker run \
+  -it --rm \
+  -e DISPLAY=$DISPLAY \
+  -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+  -e GDK_BACKEND=X11 \
+  -e HOME=$HOME \
+  -v /tmp/.X11-unix:/tmp/.X11-unix \
+  -v /tmp/.X1M-unix:/tmp/.X1M-unix \
+  -v $XDG_RUNTIME_DIR:$XDG_RUNTIME_DIR \
+  -v $HOME/docker/julia:$HOME \
+  -v $PWD:$HOME/app \
+  -u $(id -u):$(id -g) \
+  -w $HOME \
+  julia \
+  julia
