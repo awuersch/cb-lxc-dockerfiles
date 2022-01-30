@@ -10,7 +10,7 @@ domain=$1
 
 . ${0%/*}/script_env
 
-REGISTRY=rg1.test.tony.wuersch.name:443
+REGISTRY=rg1.tony.wuersch.name:443
 VOLHOME=~/docker/volumes/slapd
 target=$VOLHOME/$domain
 envvars=${target}.envvars

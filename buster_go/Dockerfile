@@ -3,7 +3,7 @@
 # COMMENTS:
 #	Debian Buster with a user "me" with sudo and gcc and go.
 
-FROM rg1.test.tony.wuersch.name:443/buster_gcc
+FROM rg1.tony.wuersch.name:443/buster_gcc
 LABEL maintainer="Tony Wuersch <tony.wuersch@gmail.com>" \
 	distro="debian"\
 	distro_long="debian-buster" \

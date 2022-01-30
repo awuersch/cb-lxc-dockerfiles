@@ -3,7 +3,7 @@
 # COMMENTS:
 #	Debian Buster with a user "me" with sudo and clang.
 
-FROM rg1.test.tony.wuersch.name:443/buster_clang
+FROM rg1.tony.wuersch.name:443/buster_clang
 
 LABEL maintainer="Tony Wuersch <tony.wuersch@gmail.com>" \
 	distro="debian" \

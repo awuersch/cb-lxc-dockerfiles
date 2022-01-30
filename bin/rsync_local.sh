@@ -20,7 +20,7 @@ done < $ETCDIR/rsync_files.txt | sort -u > $TMPDIR/rsync_dirs.txt
 # USER=root
 # ROOTDIR=/mnt/windows/bkup/rsync
 
-REMOTE=rg1.test.tony.wuersch.name
+REMOTE=rg1.tony.wuersch.name
 USER=bkup
 TARGET=$USER@$REMOTE
 ROOTDIR=bkup/rsync

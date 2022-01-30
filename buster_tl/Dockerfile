@@ -3,7 +3,7 @@
 # COMMENTS:
 #	Debian Buster with a user "me" with sudo and texlive.
 
-FROM rg1.test.tony.wuersch.name:443/buster_gcc
+FROM rg1.tony.wuersch.name:443/buster_gcc
 
 ENV LANG=C.UTF-8 \
 	LC_ALL=C.UTF-8

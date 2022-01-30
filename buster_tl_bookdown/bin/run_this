@@ -4,7 +4,7 @@ set -euf -o pipefail
 
 # env variables or defaults
 
-REGISTRY=${REGISTRY:-"rg1.test.tony.wuersch.name:443"}
+REGISTRY=${REGISTRY:-"rg1.tony.wuersch.name:443"}
 NAME=${NAME:-buster_tl_bookdown}
 APPDIR=${APPDIR:-"$HOME/proj/$NAME"}
 CMD=${CMD:-"bash -i"}

@@ -3,7 +3,7 @@
 set -euf -o pipefail
 
 REPO_DIR=${REPO_DIR:-~/src/git/github.com/awuersch/cb-lxc-dockerfiles}
-REGISTRY=${REGISTRY:-rg1.test.tony.wuersch.name:443}
+REGISTRY=${REGISTRY:-rg1.tony.wuersch.name:443}
 env \
   PROJ_BASE_DIR=$REPO_DIR/trees/proj \
   VOL_BASE_DIR=$REPO_DIR/trees/volumes \

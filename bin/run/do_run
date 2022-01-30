@@ -40,7 +40,7 @@ case $mode in
 esac
 
 # private registry
-REGISTRY=${REGISTRY:-rg1.test.tony.wuersch.name:443}
+REGISTRY=${REGISTRY:-rg1.tony.wuersch.name:443}
 # image name
 NAME=${NAME:-buster_me_sudo}
 # project base
