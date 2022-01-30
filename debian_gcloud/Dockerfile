@@ -3,7 +3,7 @@
 # COMMENTS:
 #	Debian Stretch with a user "me" with sudo and gcloud.
 
-FROM rg1.tony.wuersch.name:443/debian_me_sudo
+FROM rg1.test.tony.wuersch.name:443/debian_me_sudo
 LABEL maintainer="Tony Wuersch <tony.wuersch@gmail.com>" distro="debian" distro_long="debian-stretch" arch="x86_64"
 
 ARG DEBIAN_FRONTEND=noninteractive

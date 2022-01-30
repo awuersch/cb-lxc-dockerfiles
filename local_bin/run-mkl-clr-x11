@@ -5,7 +5,7 @@ set -euf -o pipefail
 # bash -c '"/tmp/app/setup.sh"'
 
 # REGISTRY=clearlinux
-REGISTRY=rg1.tony.wuersch.name:443
+REGISTRY=rg1.test.tony.wuersch.name:443
 # REPO=stacks-dars-mkl
 # REPO=mkl-rstudio
 # REPO=mklclr_me_sudo

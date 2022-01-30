@@ -3,7 +3,7 @@
 # COMMENTS:
 #	Debian Buster with a user "me" with sudo and texlive and R and bookdown
 
-FROM rg1.tony.wuersch.name:443/buster_tl
+FROM rg1.test.tony.wuersch.name:443/buster_tl
 LABEL maintainer="Tony Wuersch <tony.wuersch@gmail.com>" \
 	distro="debian" \
 	distro_long="debian-buster"

@@ -3,7 +3,7 @@
 # COMMENTS:
 #	Debian Buster with a user "me" with sudo, ldap utils, and slapd
 
-FROM rg1.tony.wuersch.name:443/buster_me_sudo
+FROM rg1.test.tony.wuersch.name:443/buster_me_sudo
 LABEL maintainer="Tony Wuersch <tony.wuersch@gmail.com>" distro="debian" distro_long="debian-buster" arch="x86_64"
 #
 # How to start the container:

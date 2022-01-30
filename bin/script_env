@@ -1,4 +1,4 @@
-REGISTRY=${REGISTRY:-rg1.tony.wuersch.name:443}
+REGISTRY=${REGISTRY:-rg1.test.tony.wuersch.name:443}
 IMAGE_ORDER=${IMAGE_ORDER:-$REPO_DIR/bin/image.order}
 PASSWORDFILE=${PASSWORDFILE:-~/.mypass}
 REGISTRY_PASSWORD=${REGISTRY_PASSWORD:-$(cut -f2 $PASSWORDFILE)}

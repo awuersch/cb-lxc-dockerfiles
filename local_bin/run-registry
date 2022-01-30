@@ -9,8 +9,8 @@ docker run \
   --name registry \
   --volume /etc/nginx/conf.d:/certs \
   --volume /home/tony/data:/var/lib/registry \
-  --env REGISTRY_HTTP_TLS_CERTIFICATE=/certs/rg1.crt \
-  --env REGISTRY_HTTP_TLS_KEY=/certs/rg1.key \
+  --env REGISTRY_HTTP_TLS_CERTIFICATE=/certs/rg1.test.crt \
+  --env REGISTRY_HTTP_TLS_KEY=/certs/rg1.test.key \
   --env REGISTRY_STORAGE_DELETE_ENABLED=true \
   --publish 5000:5000 \
   registry:2

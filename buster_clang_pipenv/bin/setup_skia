@@ -2,7 +2,7 @@
 
 set -euf -o pipefail
 
-REGISTRY="rg1.tony.wuersch.name:443"
+REGISTRY="rg1.test.tony.wuersch.name:443"
 DOCKERNAME=buster_clang
 APPDIR="$HOME/proj/$DOCKERNAME"
 if (($#!=0)) ; then

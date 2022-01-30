@@ -3,7 +3,7 @@
 # COMMENTS:
 #	Debian Buster with a user "me" with sudo and go and krb5 and psql.
 
-FROM rg1.tony.wuersch.name:443/buster_go_krb5
+FROM rg1.test.tony.wuersch.name:443/buster_go_krb5
 LABEL maintainer="Tony Wuersch <tony.wuersch@gmail.com>" distro_style="apt" distro="debian" distro_long="debian-buster" krb5_version="1.16-2" postgresql_version="10"
 
 ARG DEBIAN_FRONTEND=noninteractive

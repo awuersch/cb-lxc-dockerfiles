@@ -2,7 +2,7 @@
 
 set -euf -o pipefail
 
-REGISTRY="rg1.tony.wuersch.name:443"
+REGISTRY="rg1.test.tony.wuersch.name:443"
 NAME=buster_krb5_pg_pipenv_code
 APPDIR="$HOME/proj/$NAME"
 if (($#!=0)) ; then

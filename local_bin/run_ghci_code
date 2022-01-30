@@ -3,4 +3,4 @@
 set -euf -o pipefail
 
 # run ghci from a container
-docker run -it --rm -v $HOME/src/zip/Code:/home/me/app rg1.tony.wuersch.name:443/ghc_me_sudo "$@"
+docker run -it --rm -v $HOME/src/zip/Code:/home/me/app rg1.test.tony.wuersch.name:443/ghc_me_sudo "$@"

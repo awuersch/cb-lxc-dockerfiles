@@ -3,7 +3,7 @@
 # COMMENTS:
 #	Debian Buster with a user "me" with sudo and krb5 and psql and vscode.
 
-FROM rg1.tony.wuersch.name:443/buster_krb5_pg_pipenv
+FROM rg1.test.tony.wuersch.name:443/buster_krb5_pg_pipenv
 LABEL maintainer="Tony Wuersch <tony.wuersch@gmail.com>" distro_style="apt" distro="debian" distro_long="debian-10" arch="x86_64" krb5_version="1.16-2" postgresql_version="10" vscode_version="vscode-insiders" operatingsystem="linux"
 
 ARG DEBIAN_FRONTEND=noninteractive

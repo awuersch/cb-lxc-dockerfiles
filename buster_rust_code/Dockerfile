@@ -3,7 +3,7 @@
 # COMMENTS:
 #	Debian Buster with a user "me" with sudo, rust and vscode.
 
-FROM rg1.tony.wuersch.name:443/buster_rust
+FROM rg1.test.tony.wuersch.name:443/buster_rust
 LABEL maintainer="Tony Wuersch <tony.wuersch@gmail.com>" distro_style="apt" distro="debian" distro_long="debian-10" arch="x86_64" vscode_version="vscode-insiders" operatingsystem="linux"
 
 ARG DEBIAN_FRONTEND=noninteractive

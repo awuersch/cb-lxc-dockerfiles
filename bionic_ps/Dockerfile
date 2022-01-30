@@ -3,7 +3,7 @@
 # COMMENTS:
 #	Debian Buster with a user "me" with sudo and powershell.
 
-FROM rg1.tony.wuersch.name:443/bionic_me_sudo
+FROM rg1.test.tony.wuersch.name:443/bionic_me_sudo
 
 ARG DISTRO=ubuntu
 ARG VERSION=bionic

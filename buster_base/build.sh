@@ -2,7 +2,7 @@
 
 set -eu -o pipefail
 
-REGISTRY=${REGISTRY-"rg1.tony.wuersch.name:443"}
+REGISTRY=${REGISTRY-"rg1.test.tony.wuersch.name:443"}
 REPO=${REPO-"buster_base"}
 TAR_FILE=rootfs.tar
 
