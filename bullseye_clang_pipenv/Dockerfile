@@ -9,7 +9,7 @@ LABEL maintainer="Tony Wuersch <tony.wuersch@gmail.com>" \
 	distro="debian" \
 	distro_long="debian-bullseye" \
 	arch="x86_64" \
-	clang_version="6.0"
+	clang_version="11.0"
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN /usr/local/bin/clean-install \
