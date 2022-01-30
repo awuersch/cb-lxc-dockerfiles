@@ -1,7 +1,7 @@
-FROM debian:stretch
+FROM debian:bullseye
 LABEL maintainer="Tony Wuersch <tony.wuersch@gmail.com>" \
 	distro="debian"\
-	distro_long="debian-stretch"
+	distro_long="debian-bullseye"
 
 # Copy of Kubernetes debian-base
 
@@ -15,7 +15,8 @@ COPY clean-install /usr/local/bin/clean-install
 
 # Update system packages.
 RUN apt-get update \
-    && apt-get dist-upgrade -y
+    && apt-get dist-upgrade -y \
+    && apt-get install -y ca-certificates libapt-pkg6.0 apt gnupg
 
 # Hold required packages to avoid breaking the installation of packages
 RUN apt-mark hold apt gnupg adduser passwd libsemanage1 libcap2
@@ -25,19 +26,17 @@ RUN apt-mark hold apt gnupg adduser passwd libsemanage1 libcap2
 # then running `apt-cache rdepends --installed --no-recommends` to find the "root" packages.
 # The root packages were evaluated based on whether they were needed in the container image.
 # Several utilities (e.g. ping) were kept for usefulness, but may be removed in later versions.
-RUN echo "Yes, do as I say!" | apt-get purge \
-    bash \
-    e2fslibs \
-    e2fsprogs \
-    libmount1 \
-    libsmartcols1 \
-    libudev1 \
-    libblkid1 \
-    libncursesw5 \
-    libss2 \
-    ncurses-base \
-    ncurses-bin \
-    tzdata
+# RUN echo "Yes, do as I say!" | apt-get purge \
+#     bash \
+#     e2fslibs \
+#     e2fsprogs \
+#     libmount1 \
+#     libsmartcols1 \
+#     libudev1 \
+#     libblkid1 \
+#     libss2 \
+#     libncursesw6 \
+#     tzdata
 
 # No-op stubs replace some unnecessary binaries that may be depended on in the install process (in
 # particular we don't run an init process).

@@ -1,10 +1,10 @@
 # DESCRIPTION:	  Run in a default user space with sudo and gcloud
 # AUTHOR:	  Tony Wuersch <tony.wuersch@gmail.com>
 # COMMENTS:
-#	Debian Stretch with a user "me" with sudo and gcloud.
+#	Debian Bullseye with a user "me" with sudo and gcloud.
 
 FROM rg1.tony.wuersch.name:443/debian_me_sudo
-LABEL maintainer="Tony Wuersch <tony.wuersch@gmail.com>" distro="debian" distro_long="debian-stretch" arch="x86_64"
+LABEL maintainer="Tony Wuersch <tony.wuersch@gmail.com>" distro="debian" distro_long="debian-bullseye" arch="x86_64"
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN /usr/local/bin/clean-install \
@@ -12,7 +12,6 @@ RUN /usr/local/bin/clean-install \
 	ca-certificates \
 	curl \
 	lsb-release \
-	gnupg \
 	wget \
 	openssh-client \
 	git \

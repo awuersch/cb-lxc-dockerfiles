@@ -1,0 +1,38 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+REGISTRY="rg1.tony.wuersch.name:443"
+DOCKERNAME=bullseye_clang
+APPDIR="$HOME/proj/$DOCKERNAME"
+if (($#!=0)) ; then
+  APPDIR="$1"
+  if (($#==2)) ; then
+    REGISTRY="$2"
+  fi
+fi
+
+[[ -d $APPDIR ]] || {
+  >&2 echo "$APPDIR does not exist; please create it."
+  exit 1
+}
+
+MEHOME=/home/me
+DTVOLUMEHOME=$HOME/docker/volumes/dt
+GITVOLUMEHOME=$HOME/docker/volumes/git
+docker run \
+  --network my-bridge \
+  --interactive \
+  --tty \
+  --init \
+  --rm \
+  --env SHELL=/bin/bash \
+  --volume /etc/localtime:/etc/localtime:ro \
+  --volume=$APPDIR:$MEHOME/app:rw \
+  --volume=$DTVOLUMEHOME/depot_tools:$MEHOME/depot_tools:rw \
+  --volume=$GITVOLUMEHOME:$MEHOME/git:rw \
+  --user $(id -u):$(id -g) \
+  --workdir $MEHOME \
+  --name $DOCKERNAME \
+  $REGISTRY/$DOCKERNAME \
+  bash -c 'sudo apt-get update && cd ~/git/skia && python tools/git-sync-deps && sudo tools/install_dependencies.sh && bin/gn gen out/ClangShared --args="is_official_build=true is_component_build=true cc=\"clang\" cxx=\"clang++\"" && bash -l'

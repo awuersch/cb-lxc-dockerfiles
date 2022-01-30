@@ -4,7 +4,7 @@ set -euf -o pipefail
 
 DOCKER_BRIDGE=my-bridge
 # BRIDGE_IP="$(docker inspect $DOCKER_BRIDGE | jq -r '.[0].IPAM.Config[0].Gateway')"
-BRIDGE_IP="192.168.1.191"
+BRIDGE_IP="172.20.0.1"
 
 # number of file descriptors per process
 NOFILE=$(ulimit -n)
@@ -18,4 +18,4 @@ docker run \
   --volume ~/docker/volumes/squid/etc/squid/squid.conf:/etc/squid/squid.conf \
   --volume ~/docker/volumes/squid/log:/var/log/squid \
   --volume ~/docker/volumes/squid/cache:/var/spool/squid \
-  sameersbn/squid:3.5.27-1
+  sameersbn/squid:3.5.27-2

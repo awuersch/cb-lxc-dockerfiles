@@ -331,7 +331,7 @@ create a container from an image. The
 `run_pycode_bash_l` script is a convenience
 script which runs the following:
 ```
-env NAME=buster_krb5_pg_pipenv_code run_bash_l iti me_pycode
+env NAME=bullseye_krb5_pg_pipenv_code run_bash_l iti me_pycode
 ```
 
 The `NAME` environment variable assignment
@@ -381,7 +381,7 @@ better than nothing.
 --volume /usr/share/terminfo:/usr/share/host-terminfo:ro
 --user 1000:1000
 --workdir $MEHOME
---volume $PROJBASE/buster_krb5_pg_pipenv_code:$MEHOME/app:rw
+--volume $PROJBASE/bullseye_krb5_pg_pipenv_code:$MEHOME/app:rw
 --user 1000:1000
 --workdir $MEHOME
 --device /dev/snd
@@ -399,8 +399,8 @@ better than nothing.
 --volume $VOLBASE/code/pipenv/config:$MEHOME/.config:rw
 --volume $VOLBASE/code/pipenv/pki:$MEHOME/.pki:rw
 --volume $VOLBASE/code/pipenv/vscode-insiders:$MEHOME/.vscode-insiders:rw
---name buster_krb5_pg_pipenv_code
-$REGISTRY/buster_krb5_pg_pipenv_code
+--name bullseye_krb5_pg_pipenv_code
+$REGISTRY/bullseye_krb5_pg_pipenv_code
 bash -l
 ```
 

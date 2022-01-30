@@ -4,13 +4,13 @@ set -euf -o pipefail
 
 # preload some images
 for img in \
-  buster_me_sudo \
-  buster_krb5 \
-  buster_krb5_pg_pipenv_code \
-  buster_krb5_x11 \
-  buster_krb5_x11_openjdk8 \
-  buster_krb5_firefox \
-  buster_cfssl
+  bullseye_me_sudo \
+  bullseye_krb5 \
+  bullseye_krb5_pg_pipenv_code \
+  bullseye_krb5_x11 \
+  bullseye_krb5_x11_openjdk8 \
+  bullseye_krb5_firefox \
+  bullseye_cfssl
 do
   docker pull ${REGISTRY:-rg1.tony.wuersch.name:443}/$img
 done

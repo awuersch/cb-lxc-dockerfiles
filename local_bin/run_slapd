@@ -33,5 +33,5 @@ docker run \
   --env LDAP_ROOTPASS="$LDAP_ROOTPASS" \
   --env LDAP_DOMAIN="$LDAP_DOMAIN" \
   --env LDAP_ORGANIZATION="$LDAP_ORGANIZATION" \
-  $REGISTRY/buster_slapd \
+  $REGISTRY/bullseye_slapd \
   empty.sh

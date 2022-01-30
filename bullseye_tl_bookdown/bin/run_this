@@ -1,0 +1,41 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+# env variables or defaults
+
+REGISTRY=${REGISTRY:-"rg1.tony.wuersch.name:443"}
+NAME=${NAME:-bullseye_tl_bookdown}
+APPDIR=${APPDIR:-"$HOME/proj/$NAME"}
+CMD=${CMD:-"bash -i"}
+
+[[ -d $APPDIR ]] || {
+  >&2 echo "$APPDIR does not exist; please create it."
+  exit 1
+}
+
+MEHOME=/home/me
+VOLUMES=$HOME/docker/volumes
+TEXVOLUME=$VOLUMES/tl
+RVOLUME=$VOLUMESs/R
+PREFIX=/usr/local
+TEXBASE=$PREFIX/texlive
+CMDENV=("PATH=$TEXBASE/2018/bin/x86_64-linux:\$PATH")
+docker run \
+  --network my-bridge \
+  --interactive --tty --init \
+  --rm \
+  --env SHELL=/bin/bash \
+  --env DISPLAY=unix$DISPLAY \
+  --volume /etc/localtime:/etc/localtime:ro \
+  --volume /tmp/.X11-unix:/tmp/.X11-unix:rw \
+  --volume /tmp/X1M-unix:/tmp/X1M-unix:rw \
+  --volume $TEXVOLUME/texlive:$TEXBASE:rw \
+  --volume $RVOLUME/R:/etc/R:rw \
+  --volume $RVOLUME/site-library:/usr/local/lib/R/site-library:rw \
+  --volume $APPDIR:$MEHOME/app:rw \
+  --user 1000:1000 \
+  --workdir $MEHOME \
+  --name $NAME \
+  $REGISTRY/$NAME \
+  bash -l -c "env ${CMDENV[*]} ${CMD[@]}"

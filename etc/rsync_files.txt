@@ -33,7 +33,7 @@
 /etc/pam.conf
 /etc/pam.d
 /etc/passwd
-/etc/postgresql/11/main
+/etc/postgresql/13/main
 /etc/profile
 /etc/profile.d
 /etc/resolv.conf

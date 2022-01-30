@@ -2,4 +2,4 @@
 
 set -euf -o pipefail
 
-exec env NAME=buster_rust run_bash_l iti me_git
+exec env NAME=bullseye_rust run_bash_l iti me_git

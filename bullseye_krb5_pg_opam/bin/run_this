@@ -1,0 +1,40 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+REGISTRY=${REGISTRY:-rg1.tony.wuersch.name:443}
+NAME=bullseye_krb5_pg_opam
+APPDIR=${APPDIR:-$HOME/proj/$NAME}
+
+[[ -d $APPDIR ]] || {
+  >&2 echo "$APPDIR does not exist; please create it."
+  exit 1
+}
+
+MEHOME=/home/me
+KRB5VOLUME=$HOME/docker/volumes/krb5
+GITVOLUME=$HOME/docker/volumes/git
+OPAMVOLUME=$HOME/docker/volumes/opam
+myUID=$(id -u)
+myGID=$(id -g)
+USERSOCKDIR=/run/user/$myUID
+docker run \
+  --network my-bridge \
+  --interactive --tty --init \
+  --rm \
+  --env SHELL=/bin/bash \
+  --volume /etc/localtime:/etc/localtime:ro \
+  --volume $KRB5VOLUME/krb5.conf:/etc/krb5.conf:ro \
+  --volume $KRB5VOLUME/krb5:/etc/krb5:ro \
+  --volume $KRB5VOLUME/pguser.keytab:/etc/pguser.keytab:ro \
+  --volume $GITVOLUME/git:$MEHOME/git \
+  --volume $GITVOLUME/gitconfig:$MEHOME/.gitconfig \
+  --volume $OPAMVOLUME/opam:$MEHOME/.opam \
+  --volume $OPAMVOLUME/ocamlinit:$MEHOME/.ocamlinit \
+  --volume $USERSOCKDIR/ssh-agent.socket:$USERSOCKDIR/ssh-agent.socket:rw \
+  --volume $APPDIR:$MEHOME/app \
+  --user $myUID:$myGID \
+  --workdir $MEHOME \
+  --name $NAME \
+  $REGISTRY/$NAME \
+  bash -l

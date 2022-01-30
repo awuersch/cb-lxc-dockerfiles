@@ -37,4 +37,4 @@ docker run \
   --env LDAP_DOMAIN="$LDAP_DOMAIN" \
   --env LDAP_ORGANIZATION="$LDAP_ORGANIZATION" \
   --entrypoint bash \
-  $REGISTRY/buster_slapd
+  $REGISTRY/bullseye_slapd

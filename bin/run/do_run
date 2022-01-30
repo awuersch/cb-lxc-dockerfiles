@@ -42,7 +42,7 @@ esac
 # private registry
 REGISTRY=${REGISTRY:-rg1.tony.wuersch.name:443}
 # image name
-NAME=${NAME:-buster_me_sudo}
+NAME=${NAME:-bullseye_me_sudo}
 # project base
 PROJ_BASE_DIR=${PROJ_BASE_DIR:-~/proj}
 # volumes base

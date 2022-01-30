@@ -1,10 +1,10 @@
 # DESCRIPTION:	  Run in a default user space with sudo and krb5 and x11
 # AUTHOR:	  Tony Wuersch <tony.wuersch@gmail.com>
 # COMMENTS:
-#	Debian Stretch with a user "me" with sudo and krb5 and x11.
+#	Debian Bullseye with a user "me" with sudo and krb5 and x11.
 
 FROM rg1.tony.wuersch.name:443/debian_krb5
-LABEL maintainer="Tony Wuersch <tony.wuersch@gmail.com>" distro="debian" distro_long="debian-stretch" arch="x86_64" krb5_version="1.16-2"
+LABEL maintainer="Tony Wuersch <tony.wuersch@gmail.com>" distro="debian" distro_long="debian-bullseye" arch="x86_64" krb5_version="1.16-2"
 
 RUN /usr/local/bin/clean-install \
 	libasound2 \
