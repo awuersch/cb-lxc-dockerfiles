@@ -4,7 +4,7 @@
 #	Debian Bullseye with a user "me" with sudo and krb5 and psql and opam.
 
 FROM rg1.tony.wuersch.name:443/bullseye_krb5_pg
-LABEL maintainer="Tony Wuersch <tony.wuersch@gmail.com>" distro_style="apt" distro="debian" distro_long="debian-bullseye" arch="x86_64" krb5_version="1.16-2" postgresql_version="13" operatingsystem="linux"
+LABEL maintainer="Tony Wuersch <tony.wuersch@gmail.com>" distro_style="apt" distro="debian" distro_long="debian-bullseye" arch="x86_64" krb5_version="1.16-2" postgresql_version="13" ocaml_version="4.13.1" operatingsystem="linux"
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG OCAML_GITDIR=src/git/github.com/ocaml
@@ -14,8 +14,9 @@ COPY get_min_ocaml_packages.sh /usr/local/bin/get_min_ocaml_packages.sh
 COPY get_ocaml_packages.sh /usr/local/bin/get_ocaml_packages.sh
 COPY opam_init.sh /usr/local/bin/opam_init.sh
 
-RUN /usr/local/bin/clean-install \
-	git \
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends --allow-change-held-packages libcap2 && \
+    /usr/local/bin/clean-install \
 	mercurial \
 	darcs \
 	pkg-config \

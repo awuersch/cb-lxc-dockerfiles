@@ -12,8 +12,7 @@ COPY start.sh /usr/local/bin/start.sh
 COPY get_vscode_extensions.sh /usr/local/bin/get_vscode_extensions.sh
 
 RUN /usr/local/bin/clean-install \
-    curl \
-    gnupg
+    curl
 
 # Add the vscode debian repo
 RUN curl -sSL https://packages.microsoft.com/keys/microsoft.asc \

@@ -29,6 +29,7 @@ RUN /usr/local/bin/clean-install \
     libexpat1 \
     libfontconfig1 \
     libfreetype6 \
+    libglu1 \
     libgtk2.0-0 \
     libpango-1.0-0 \
     libx11-xcb1 \
@@ -40,5 +41,6 @@ RUN /usr/local/bin/clean-install \
     libxi6 \
     libxrandr2 \
     libxrender1 \
+    libxshmfence1 \
     libxss1 \
     libxtst6
